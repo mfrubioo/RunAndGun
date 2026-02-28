@@ -8,9 +8,13 @@ public class PickUp : MonoBehaviour
 {
 
     PlayerInputActions inputActions;
-    List<string> gunNames = new List<string>()
+    List<string> primaryGunNames = new List<string>()
     {
-        "rifle","escopeta", "fusil de precision","glock","desert eagle"
+        "rifle","escopeta", "fusil de precision"
+    };
+    List<string> secondaryGunNames = new List<string>()
+    {
+        "glock","desert eagle"
     };
 
     Camera cam;
@@ -81,7 +85,10 @@ public class PickUp : MonoBehaviour
     void PickUpTXTUpdate(GameObject gun)
     {
         int gunID = gun.GetComponent<GunId>().id;
-        txtPickUp.text = "Pulsa E para coger " + gunNames[gunID];
+        if(gun.tag== "ArmaPrincipal")
+            txtPickUp.text = "Pulsa E para coger " + primaryGunNames[gunID];
+        else if (gun.tag == "ArmaSecundaria")
+            txtPickUp.text = "Pulsa E para coger " + secondaryGunNames[gunID];
     }
 
     void PickUpAction()
